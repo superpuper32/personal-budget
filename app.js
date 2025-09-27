@@ -7,7 +7,15 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-app.post("/api/envelopes", (req, res, next) => {
+app.get("/api/envelopes", (req, res) => {
+  if (envelopes) {
+    res.send({ envelopes });
+  } else {
+    res.status(404).send();
+  }
+});
+
+app.post("/api/envelopes", (req, res) => {
     const { budget, title } = req.query;
 
     if (budget && title) {
